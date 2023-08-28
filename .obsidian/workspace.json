@@ -11,14 +11,11 @@
             "id": "dbb80423ce3f26dd",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "KANERVA2009.canvas",
-                "viewState": {
-                  "x": 0,
-                  "y": 0,
-                  "zoom": 0
-                }
+                "file": "papers/KANERVA2009.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -88,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "KANERVA2009.canvas",
+                "file": "papers/KANERVA2009.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "KANERVA2009.canvas",
+                "file": "papers/KANERVA2009.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -128,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "KANERVA2009.canvas"
+                "file": "papers/KANERVA2009.md"
               }
             }
           }
@@ -149,9 +146,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8e3cce55a52f25d1",
+  "active": "dbb80423ce3f26dd",
   "lastOpenFiles": [
-    "KANERVA2009.md",
-    "KANERVA2009.canvas"
+    "papers/KANERVA2009.canvas",
+    "papers/KANERVA2009.md",
+    "papers",
+    "0x100",
+    "Pasted image 20230828132118.png",
+    "Pasted image 20230828132114.png"
   ]
 }
