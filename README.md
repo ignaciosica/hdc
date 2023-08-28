@@ -1,0 +1,2 @@
+# hdc
+Hyper-dimensional computing
