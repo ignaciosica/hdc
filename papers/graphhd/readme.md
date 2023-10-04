@@ -2,6 +2,10 @@
 
 **GraphHD** implementation in python with numpy, networkx and sklearn
 
+**Abstract.** GraphHD presents a novel baseline approach for graph classification with HDC. It uses PageRank centrality rank to map vertices from different graphs into the same HV. The classification algorithm is simply comparison similarity search for the given query-vector with the classes HVs.
+
+**Abstract.** Hyperdimensional Computing (HDC) developed by Kanerva is a computational model for machine learning inspired by neuroscience. HDC exploits characteristics of biological neural systems such as high-dimensionality, randomness and a holographic representation of information to achieve a good balance between accuracy, efficiency and robustness. HDC models have already been proven to be useful in different learning applications, especially in resource-limited settings such as the increas- ingly popular Internet of Things (IoT). One class of learning tasks that is missing from the current body of work on HDC is graph classification. Graphs are among the most important forms of information representation, yet, to this day, HDC algorithms have not been applied to the graph learning problem in a general sense. Moreover, graph learning in IoT and sensor networks, with limited compute capabilities, introduce challenges to the overall design methodology. In this paper, we present GraphHD — a baseline approach for graph classification with HDC. We evaluate GraphHD on real-world graph classification problems. Our results show that when compared to the state-of-the-art Graph Neural Networks (GNNs) the proposed model achieves comparable accuracy, while training and inference times are on average 14.6× and 2.0× faster, respectively.
+
 ### Dependencies
 
 ```python
