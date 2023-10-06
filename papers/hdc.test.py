@@ -92,3 +92,33 @@ class TestBasicArithmetic(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# # Basic tests
+
+# A, B = hdv(10000), hdv(10000)
+# C = weightedAverage(A, B, 0.90, 0.1)
+# # print(A)
+# # print(B)
+# # print(C)
+# # print(cosine_similarity(A, B))
+# # print(cosine_similarity(B, C))
+
+# a = 0.75
+
+# Ba = hdvA(B, a)
+# Bb = hdvA(B, 0.6)
+# print(cosine_similarity(B, Ba))
+# # print(cosine_similarity(Ba, Bb))
+# print((cosine_similarity(B, Ba) + 1) / 2)
+# print((similarity(B, Ba) + 1) / 2)
+
+# Bw = hdvW(B, 0.1)
+# print(B)
+# print(Bw)
+# print(cosine_similarity(B, Bw))
+# print((cosine_similarity(B, Bw) + 1) / 2)
+
+# Bw1 = hdvW(B, 0.0248)
+# Bw2 = hdvW(B, 0.015)
+# print(cosine_similarity(Bw1, Bw2))

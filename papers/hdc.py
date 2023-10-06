@@ -55,7 +55,14 @@ def cosine_similarity(A, B):
 
 def weightedAverage(A, B, p, q):
     return np.fromiter(
-        map(lambda t: np.random.choice([t[0], t[1]], p=[p, q]), zip(A, B)),
+        map(lambda t: np.random.choice([*t], p=[p, q]), zip(A, B)),
+        dtype=np.int_,
+    )
+
+
+def weightedAverages(xs, ps):
+    return np.fromiter(
+        map(lambda t: np.random.choice([*t], p=ps), zip(xs)),
         dtype=np.int_,
     )
 

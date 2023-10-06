@@ -6,6 +6,7 @@ import networkx as nx
 
 # Graph pre-processing
 
+
 def processDataset(dataset):
     graphs = []
     labels = []
@@ -17,6 +18,7 @@ def processDataset(dataset):
         labels.append(graph["y"][0])
 
     return (graphs, labels)
+
 
 def transform(X, alpha, digits):
     graphs = []
