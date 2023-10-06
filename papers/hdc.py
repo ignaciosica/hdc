@@ -6,8 +6,13 @@ import functools as ft
 
 # Basic arithemitic operations
 
+
 def hdv(d):
     return np.random.choice([-1, 1], d)
+
+
+def zero(d):
+    return np.zeros((d,))
 
 
 def bind(xs):
@@ -18,8 +23,20 @@ def bundle(xs):
     return ft.reduce(lambda x, y: x + y, xs)
 
 
-def similarity(A, B):
-    return np.dot(A, B) / len(A)
+def bundleS(xs):
+    return np.sign(ft.reduce(lambda x, y: x + y, xs))
+
+
+def pm(d):
+    return np.random.shuffle(np.eye(d))
+
+
+def inversePm(P):
+    return np.linalg.inv(P)
+
+
+def permute(P, H):
+    return P.dot(H)
 
 
 def cosine_similarity(A, B):
@@ -33,7 +50,29 @@ def cosine_similarity(A, B):
     return dot_product / (norm_A * norm_B)
 
 
+# Stochastic arithmetic
+
+
+def weightedAverage(A, B, p, q):
+    return np.fromiter(
+        map(lambda t: np.random.choice([t[0], t[1]], p=[p, q]), zip(A, B)),
+        dtype=np.int_,
+    )
+
+
+def hdvA(B, a):
+    return weightedAverage(B, -B, (a + 1) / 2, (1 - a) / 2)
+
+
+def hdvW(B, w):
+    start = round(w * len(B))
+    head = B[:start]
+    tail = B[start:] * -1
+    return np.concatenate([head, tail])
+
+
 # Memory
+
 
 class ItemMemory:
     def __init__(self, vectors=[]):
