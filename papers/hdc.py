@@ -15,34 +15,38 @@ def zero(d):
     return np.zeros((d,))
 
 
-def bind(xs):
-    return ft.reduce(lambda x, y: x * y, xs)
+def bind(vs):
+    return ft.reduce(lambda x, y: x * y, vs)
 
 
-def bundle(xs):
-    return ft.reduce(lambda x, y: x + y, xs)
+def bundle(vs):
+    return ft.reduce(lambda x, y: x + y, vs)
 
 
-def bundleS(xs):
-    return np.sign(ft.reduce(lambda x, y: x + y, xs))
+def sbundle(vs):
+    return np.sign(ft.reduce(lambda x, y: x + y, vs))
 
 
 def pm(d):
     return np.random.shuffle(np.eye(d))
 
 
-def inversePm(P):
-    return np.linalg.inv(P)
+def inverse_pm(pm):
+    return np.linalg.inv(pm)
 
 
-def permute(P, H):
-    return P.dot(H)
+def permute(pm, H):
+    return pm.dot(H)
 
 
-def cosine_similarity(A, B):
+def cosine_similarity(A, B, norm_A=None, norm_B=None):
     dot_product = np.dot(A, B)
-    norm_A = np.linalg.norm(A)
-    norm_B = np.linalg.norm(B)
+
+    if norm_A is None:
+        norm_A = np.linalg.norm(A)
+
+    if norm_B is None:
+        norm_B = np.linalg.norm(B)
 
     if norm_A == 0 or norm_B == 0:
         return 0
@@ -50,28 +54,23 @@ def cosine_similarity(A, B):
     return dot_product / (norm_A * norm_B)
 
 
+cosim = cosine_similarity
+
+
 # Stochastic arithmetic
 
 
-def weightedAverage(A, B, p, q):
+def weighted_averages(vs, ps):
     return np.fromiter(
-        map(lambda t: np.random.choice([*t], p=[p, q]), zip(A, B)),
-        dtype=np.int_,
+        map(lambda t: np.random.choice([*t], p=ps), zip(*vs)), dtype=np.int_
     )
 
 
-def weightedAverages(xs, ps):
-    return np.fromiter(
-        map(lambda t: np.random.choice([*t], p=ps), zip(xs)),
-        dtype=np.int_,
-    )
+def hdva(B, a):
+    return weighted_averages([B, -B], [(a + 1) / 2, (1 - a) / 2])
 
 
-def hdvA(B, a):
-    return weightedAverage(B, -B, (a + 1) / 2, (1 - a) / 2)
-
-
-def hdvW(B, w):
+def hdvw(B, w):
     start = round(w * len(B))
     head = B[:start]
     tail = B[start:] * -1
@@ -82,11 +81,16 @@ def hdvW(B, w):
 
 
 class ItemMemory:
-    def __init__(self, vectors=[]):
-        self.vectors = vectors
+    def __init__(self):
+        self.vectors = []
 
-    def addVector(self, label, V):
-        self.vectors.append((label, V))
+    def add_vector(self, label, V):
+        self.vectors.append((label, V, np.linalg.norm(V)))
+
+    def cleanup_aux(self, V):
+        norm_V = np.linalg.norm(V)
+        return max(self.vectors, key=lambda x: cosim(V, x[1], norm_V, x[2]))
 
     def cleanup(self, V):
-        return max(self.vectors, key=lambda x: cosine_similarity(V, x[1]))
+        H = self.cleanup_aux(V)
+        return (H[0], H[1], cosim(V, H[1]))

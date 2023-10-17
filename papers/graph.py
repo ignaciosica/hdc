@@ -7,14 +7,12 @@ import networkx as nx
 # Graph pre-processing
 
 
-def processDataset(dataset):
+def process_dataset(dataset):
     graphs, labels = [], []
 
     for graph in dataset:
         G = nx.Graph()
         G.add_edges_from(zip(graph["edge_index"][0], graph["edge_index"][1]))
-        nx.set_node_attributes(G, graph["node_feat"])
-        # set_node_attributes(G, graph["node_feat"])
         graphs.append(G)
         labels.append(graph["y"][0])
 
