@@ -94,3 +94,27 @@ class ItemMemory:
     def cleanup(self, V):
         H = self.cleanup_aux(V)
         return (H[0], H[1], cosim(V, H[1]))
+
+
+# Linear convolution
+
+
+def hdvs(n, d):
+    return [hdv(d) for _ in range(n)]
+
+
+def convolution(vs, side=2, weight=20):
+    size = len(vs) - 2 * side
+    width = side * 2 + 1
+
+    return np.array(
+        [sbundle([*vs[i : i + width], weight * vs[i + side]]) for i in range(size)]
+    )
+
+
+def hdvsc(n, d, side=2, weight=20, iter=5):
+    vs = hdvs(n + iter * side * 2, d)
+    for _ in range(iter):
+        vs = convolution(vs, side, weight)
+
+    return vs
