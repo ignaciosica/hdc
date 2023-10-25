@@ -4,6 +4,7 @@ import tinygrad.mlops as mlops
 from tinygrad.helpers import prod
 
 import numpy as np
+import timeit
 
 
 def hdv(d):
@@ -22,44 +23,49 @@ def bundle(vs):
     return Tensor.stack(vs).sum(axis=0)
 
 
+# tests
+DIMENSIONS = 10000
+vs = [hdv(DIMENSIONS) for i in range(1000)]
+print(timeit.timeit(lambda: bundle([bind(vs), bind(vs), bind(vs)]), number=1))
+
 # TODO
-def sbundle(vs):
-    return Tensor.stack(vs).sum(axis=0)
+# def sbundle(vs):
+#     return Tensor.stack(vs).sum(axis=0)
+
+# TODO
+# def cosine_similarity(A, B, norm_A=None, norm_B=None):
+#     dot_product = A.dot(B)
+
+#     if norm_A is None:
+#         norm_A = np.linalg.norm(A.numpy())
+
+#     if norm_B is None:
+#         norm_B = np.linalg.norm(B.numpy())
+
+#     if norm_A == 0 or norm_B == 0:
+#         return 0
+
+#     return dot_product / (norm_A * norm_B)
 
 
-def cosine_similarity(A, B, norm_A=None, norm_B=None):
-    dot_product = A.dot(B)
+# a = hdv(10000)
+# b = hdv(10000)
+# c = hdv(10000)
 
-    if norm_A is None:
-        norm_A = np.linalg.norm(A.numpy())
+# s = Tensor.stack([a, b, c])
 
-    if norm_B is None:
-        norm_B = np.linalg.norm(B.numpy())
-
-    if norm_A == 0 or norm_B == 0:
-        return 0
-
-    return dot_product / (norm_A * norm_B)
-
-
-a = hdv(10000)
-b = hdv(10000)
-c = hdv(10000)
-
-s = Tensor.stack([a, b, c])
-
-p = prod([a, b, c])
-print("p ", p.numpy())
-bi = bind([a, b, c])
-print("bi", bi.numpy())
-# sumt = s._reduce(mlops.Sum, axis=0)
-# t = s.sum(axis=0)
+# p = prod([a, b, c])
+# print("p ", p.numpy())
+# bi = bind([a, b, c])
+# print("bi", bi.numpy())
+# # sumt = s._reduce(mlops.Sum, axis=0)
+# # t = s.sum(axis=0)
 
 
-print(s.numpy())
-# print(sumt.numpy())
-# print(t.numpy())
-# print(bundle([a, b, c]).numpy())
-print(sbundle([a, b, c]).numpy())
+# print(s.numpy())
+# # print(sumt.numpy())
+# # print(t.numpy())
+# # print(bundle([a, b, c]).numpy())
+# print(sbundle([a, b, c]).numpy())
 
-print(cosine_similarity(a, b).numpy())
+# print(cosine_similarity(a, b).numpy())
