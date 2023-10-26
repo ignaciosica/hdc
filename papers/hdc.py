@@ -35,8 +35,8 @@ def inverse_pm(pm):
     return np.linalg.inv(pm)
 
 
-def permute(pm, H):
-    return pm.dot(H)
+def permute(pm, v):
+    return pm.dot(v)
 
 
 def cosine_similarity(A, B, norm_A=None, norm_B=None):
