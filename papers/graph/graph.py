@@ -4,6 +4,7 @@ import numpy as np
 import functools as ft
 import networkx as nx
 
+
 # Graph pre-processing
 
 
@@ -12,7 +13,9 @@ def process_dataset(dataset):
 
     for graph in dataset:
         G = nx.Graph()
-        G.add_edges_from(zip(graph["edge_index"][0], graph["edge_index"][1]))
+        G.add_edges_from(
+            zip(graph["edge_index"][0], graph["edge_index"][1]), nodetype=int
+        )
         graphs.append(G)
         labels.append(graph["y"][0])
 
