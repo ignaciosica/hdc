@@ -17,7 +17,7 @@ def process_dataset(dataset):
         G.add_edges_from(
             zip(graph["edge_index"][0], graph["edge_index"][1]), nodetype=int
         )
-        if G.number_of_nodes() > 100:
+        if G.number_of_nodes() > 1000:
             continue
         graphs.append(G)
         labels.append(graph["y"][0])

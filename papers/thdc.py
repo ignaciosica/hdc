@@ -53,6 +53,15 @@ class ItemMemory:
         H = self.cleanup_aux(V)
         return (H[0], H[1], cosim(V, H[1]))
 
+    def cleanup_all_aux(self, V, n=10):
+        norm_V = torch.norm(V)
+        return sorted(
+            self.vectors, key=lambda x: cosim(V, x[1], norm_V, x[2]), reverse=True
+        )[:n]
+
+    def cleanup_all(self, V, n=10):
+        return [(H[0], H[1], cosim(V, H[1])) for H in self.cleanup_all_aux(V, n=n)]
+
 
 def hdvs(n, d):
     return [hdv(d) for _ in range(n)]
