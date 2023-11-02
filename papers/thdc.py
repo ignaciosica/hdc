@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 
 torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -19,13 +20,17 @@ def sbundle(xs):
     return torch.sign(torch.sum(torch.cat(xs), axis=0))
 
 
-def cosine_similarity(A, B):
+def cosine_similarity(A, B, norm_A=None, norm_B=None):
     dot_product = torch.dot(A, B)
-    norm_A = torch.norm(A)
-    norm_B = torch.norm(B)
 
-    # if norm_A == 0 or norm_B == 0:
-    #     return 0
+    if norm_A is None:
+        norm_A = torch.norm(A)
+
+    if norm_B is None:
+        norm_B = torch.norm(B)
+
+    if norm_A == 0 or norm_B == 0:
+        return 0
 
     return torch.div(dot_product, norm_A * norm_B)
 
@@ -41,7 +46,7 @@ class ItemMemory:
         self.vectors.append((label, V, torch.norm(V)))
 
     def cleanup_aux(self, V):
-        norm_V = np.linalg.norm(V)
+        norm_V = torch.norm(V)
         return max(self.vectors, key=lambda x: cosim(V, x[1], norm_V, x[2]))
 
     def cleanup(self, V):
