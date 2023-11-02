@@ -20,7 +20,7 @@ def bind(vs):
 
 
 def bundle(vs):
-    return ft.reduce(lambda x, y: x + y, vs)
+    return ft.reduce(lambda x, y: np.add(x, y), vs)
 
 
 def sbundle(vs):
@@ -28,7 +28,9 @@ def sbundle(vs):
 
 
 def pm(d):
-    return np.random.shuffle(np.eye(d))
+    P = np.eye(d)
+    np.random.shuffle(P)
+    return P
 
 
 def inverse_pm(pm):
