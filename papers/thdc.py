@@ -45,6 +45,9 @@ class ItemMemory:
     def add_vector(self, label, V):
         self.vectors.append((label, V, torch.norm(V)))
 
+    def add_vector_wn(self, label, V):
+        self.vectors.append((label, V))
+
     def cleanup_aux(self, V):
         norm_V = torch.norm(V)
         return max(self.vectors, key=lambda x: cosim(V, x[1], norm_V, x[2]))
@@ -55,9 +58,9 @@ class ItemMemory:
 
     def cleanup_all_aux(self, V, n=10):
         norm_V = torch.norm(V)
-        return sorted(
-            self.vectors, key=lambda x: cosim(V, x[1], norm_V, x[2]), reverse=True
-        )[:n]
+        return sorted(self.vectors, key=lambda x: cosim(V, x[1], norm_V), reverse=True)[
+            :n
+        ]
 
     def cleanup_all(self, V, n=10):
         return [(H[0], H[1], cosim(V, H[1])) for H in self.cleanup_all_aux(V, n=n)]
