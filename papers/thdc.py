@@ -4,12 +4,30 @@ import numpy as np
 torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-def hdv(d):
-    return torch.sign(torch.randint(-100000, 100000, (d,), dtype=torch.float))
+def hdv(d, dtype=torch.float):
+    v = torch.randint(0, 2, (d,), dtype=dtype, device="cuda")
+    v[v == 0] = -1
+
+    return v
+
+
+def hdvs(d, n, dtype=torch.float):
+    vs = torch.randint(0, 2, (d, n), dtype=dtype, device="cuda")
+    vs[vs == 0] = -1
+
+    return vs
 
 
 def bind(xs):
-    return torch.prod(torch.cat(xs), axis=0)
+    return torch.prod(torch.cat(xs, dim=0), dim=-1)
+
+
+a = hdv(10)
+b = hdv(10)
+ab = torch.cat((a, b), axis=1)
+print(ab)
+
+print(bind([a, b]))
 
 
 def bundle(xs):
@@ -64,10 +82,6 @@ class ItemMemory:
 
     def cleanup_all(self, V, n=10):
         return [(H[0], H[1], cosim(V, H[1])) for H in self.cleanup_all_aux(V, n=n)]
-
-
-def hdvs(n, d):
-    return [hdv(d) for _ in range(n)]
 
 
 def convolution(vs, side=2, weight=20):
