@@ -38,5 +38,13 @@ def transform(X, alpha, digits):
 
 
 def centrality(X, rank):
+    graphs = []
     for graph in X:
-        yield nx.relabel_nodes(graph, rank(graph))
+        graphs.append(nx.relabel_nodes(graph, rank(graph)))
+
+    return graphs
+
+
+# def centrality(X, rank):
+#     for graph in X:
+#         yield nx.relabel_nodes(graph, rank(graph))

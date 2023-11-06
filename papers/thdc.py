@@ -19,23 +19,24 @@ def hdvs(d, n, dtype=torch.float):
 
 
 def bind(xs):
-    return torch.prod(torch.cat(xs, dim=0), dim=-1)
+    return torch.prod(torch.stack(xs), 0)
 
 
-a = hdv(10)
-b = hdv(10)
-ab = torch.cat((a, b), axis=1)
-print(ab)
-
-print(bind([a, b]))
+# a = hdv(10)
+# b = hdv(10)
+# ba = torch.stack([a, b], 0)
+# print(ba)
 
 
 def bundle(xs):
-    return torch.sum(torch.cat(xs), axis=0)
+    return torch.sum(torch.stack(xs), 0)
+
+
+# print(bundle((a, b)))
 
 
 def sbundle(xs):
-    return torch.sign(torch.sum(torch.cat(xs), axis=0))
+    return torch.sign(torch.sum(torch.stack(xs), 0))
 
 
 def cosine_similarity(A, B, norm_A=None, norm_B=None):
