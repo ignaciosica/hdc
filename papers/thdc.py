@@ -18,6 +18,18 @@ def hdvs(d, n, dtype=torch.float):
     return vs
 
 
+def hdvw(B, w):
+    start = round(w * len(B))
+    head = B[:start]
+    tail = B[start:] * -1
+    return torch.cat((head, tail), dim=0)
+
+
+# a = hdv(10)
+# print(a)
+# print(hdvw(a, 0.5))
+
+
 def bind(xs):
     return torch.prod(torch.stack(xs), 0)
 
