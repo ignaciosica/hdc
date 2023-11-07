@@ -4,14 +4,14 @@ import numpy as np
 torch.set_default_device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-def hdv(d, dtype=torch.float):
+def hdv(d, dtype=torch.int8):
     v = torch.randint(0, 2, (d,), dtype=dtype, device="cuda")
     v[v == 0] = -1
 
     return v
 
 
-def hdvs(d, n, dtype=torch.float):
+def hdvs(d, n, dtype=torch.int8):
     vs = torch.randint(0, 2, (d, n), dtype=dtype, device="cuda")
     vs[vs == 0] = -1
 
