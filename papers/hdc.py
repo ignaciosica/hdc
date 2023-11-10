@@ -72,31 +72,31 @@ def hdva(B, a):
     return weighted_averages([B, -B], [(a + 1) / 2, (1 - a) / 2])
 
 
-B = hdv(10000)
-a = 0.7
-b = 0.3
-Ba = hdva(B, a)
-Bb = hdva(B, b)
+# B = hdv(10000)
+# a = 0.7
+# b = 0.3
+# Ba = hdva(B, a)
+# Bb = hdva(B, b)
 
-A = hdv(10000)
-C = hdv(10000)
+# A = hdv(10000)
+# C = hdv(10000)
 
-Ta = weighted_averages([A, C], [0.64, 0.36])
-Tb = weighted_averages([A, C], [0.64, 0.36])
-print("A  - Ta", cosim(A, Ta))
-print("A  - Tb", cosim(A, Tb))
-print("B  - Ta", cosim(C, Ta))
-print("B  - Tb", cosim(C, Tb))
+# Ta = weighted_averages([A, C], [0.64, 0.36])
+# Tb = weighted_averages([A, C], [0.64, 0.36])
+# print("A  - Ta", cosim(A, Ta))
+# print("A  - Tb", cosim(A, Tb))
+# print("B  - Ta", cosim(C, Ta))
+# print("B  - Tb", cosim(C, Tb))
 
-print("Ta - Tb", cosim(Ta, Tb))
+# print("Ta - Tb", cosim(Ta, Tb))
 
-Taa = bundle([A * 10, C * 1])
-Tbb = bundle([A * 10, C * 1])
-print("A  - Taa", cosim(A, Taa))
-print("A  - Tbb", cosim(A, Tbb))
-print("C  - Taa", cosim(C, Taa))
-print("C  - Tbb", cosim(C, Tbb))
-print("Taa  - Tbb", cosim(Taa, Tbb))
+# Taa = bundle([A * 10, C * 1])
+# Tbb = bundle([A * 10, C * 1])
+# print("A  - Taa", cosim(A, Taa))
+# print("A  - Tbb", cosim(A, Tbb))
+# print("C  - Taa", cosim(C, Taa))
+# print("C  - Tbb", cosim(C, Tbb))
+# print("Taa  - Tbb", cosim(Taa, Tbb))
 # print(cosim(B, Ba))
 # print(cosim(B, Bb))
 # print(cosim(Ba, Bb))
