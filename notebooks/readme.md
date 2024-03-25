@@ -1,0 +1,3 @@
+# Notebooks
+
+This folder houses a collection of tests and experiments, functioning as a creative sandbox for trialing new algorithms as well as iterating on established methodologies. Each notebook commences with a brief introduction, outlining the objectives of the experiments conducted within, and concludes with a detailed account of the results achieved. Additionally, a dedicated section for references is included in every notebook, providing sources and further reading materials.
